@@ -22,3 +22,6 @@ plug "zsh-users/zsh-syntax-highlighting"
 plug "zap-zsh/fzf"
 plug "zap-zsh/fnm"
 plug "romkatv/powerlevel10k"
+
+# zsh-autosuggestions | accept-suggestion
+bindkey '^ ' autosuggest-accept
