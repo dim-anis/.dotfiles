@@ -25,4 +25,4 @@ plug "romkatv/powerlevel10k"
 
 # zsh-autosuggestions | accept-suggestion
 bindkey '^ ' autosuggest-accept
-bindkey '^f' 'tmux-sessionizer\n'
+bindkey -s '^f' 'tmux-sessionizer\n'
