@@ -18,9 +18,11 @@ plug "$HOME/.config/zsh/exports.zsh"
 plug "zap-zsh/supercharge"
 plug "zap-zsh/exa"
 plug "zsh-users/zsh-autosuggestions"
+plug "hlissner/zsh-autopair"
 plug "zsh-users/zsh-syntax-highlighting"
 plug "zap-zsh/fzf"
 plug "zap-zsh/fnm"
+plug "zap-zsh/vim"
 plug "romkatv/powerlevel10k"
 
 # zsh-autosuggestions | accept-suggestion
