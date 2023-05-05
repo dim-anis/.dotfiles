@@ -14,6 +14,9 @@ lctrl + alt - k : yabai -m window --resize top:0:-50; \
 lctrl + alt - l : yabai -m window --resize right:50:0; \
                   yabai -m window --resize left:50:0
 
+# Equalize window size
+lctrl + alt - e : yabai -m space --balance
+
 # swap managed window
 shift + alt - h : yabai -m window --swap west
 shift + alt - j : yabai -m window --swap south
