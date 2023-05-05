@@ -1,3 +1,3 @@
-require("dimanis.options")
-require("dimanis.remap")
-
+require('dimanis.remap')
+require('dimanis.options')
+require('dimanis.autocmds')
