@@ -1,24 +1,24 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    version = false, -- last release is way too old and doesn't work on Windows
+    version = "*", -- last release is way too old and doesn't work on Windows
     build = ":TSUpdate",
     lazy = false,
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
-        "nvim-treesitter/nvim-treesitter-textobjects",
+      "nvim-treesitter/nvim-treesitter-textobjects",
     },
     opts = function(_, opts)
       if type(opts.ensure_installed) == "table" then
         vim.list_extend(opts.ensure_installed, { "typescript", "tsx" })
       end
     end,
-    config = function ()
+    config = function()
       require("nvim-treesitter.configs").setup {
         highlight = {
           enable = true,
           additional_vim_regex_highlighting = false,
-         },
+        },
         indent = { enable = true },
         context_commentstring = { enable = true, enable_autocmd = false },
         auto_install = true,
@@ -72,12 +72,12 @@ return {
               ["ip"] = { query = "@parameter.inner", desc = "inside a parameter" },
             },
             selection_modes = {
-              ["@parameter.outer"] = "v", -- charwise
-              ["@parameter.inner"] = "v", -- charwise
-              ["@function.outer"] = "v", -- charwise
+              ["@parameter.outer"] = "v",   -- charwise
+              ["@parameter.inner"] = "v",   -- charwise
+              ["@function.outer"] = "v",    -- charwise
               ["@conditional.outer"] = "V", -- linewise
-              ["@loop.outer"] = "V", -- linewise
-              ["@class.outer"] = "<c-v>", -- blockwise
+              ["@loop.outer"] = "V",        -- linewise
+              ["@class.outer"] = "<c-v>",   -- blockwise
             },
             include_surrounding_whitespace = false,
           },
