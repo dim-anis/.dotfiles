@@ -91,17 +91,6 @@ return {
       --
       -- end
     },
-    -- {
-    --   "jay-babu/mason-nvim-dap.nvim",
-    --   dependencies = "mason.nvim",
-    --   cmd = { "DapInstall", "DapUninstall" },
-    --   opts = {
-    --     automatic_installation = true,
-    --     handlers = {
-    --     },
-    --     ensure_installed = { 'js' },
-    --   },
-    -- },
   },
   keys = {
     { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end,
@@ -205,6 +194,16 @@ return {
       },
     })
 
+    dap.adapters['pwa-node'] = {
+      type = 'server',
+      host = 'localhost',
+      port = '${port}',
+      executable = {
+        command = 'js-debug-adapter',
+        args = { '${port}' },
+      }
+    }
+
     for _, language in ipairs({
       'typescript',
       'javascript',
@@ -216,6 +215,8 @@ return {
           name = 'TS-Node Launch',
           type = 'pwa-node',
           request = 'launch',
+          runtimeArgs = { '-y', 'ts-node' },
+          runtimeExecutable = 'npx',
           program = '${file}',
           cwd = '${workspaceFolder}',
           sourceMaps = true,
@@ -226,7 +227,6 @@ return {
             '${workspaceFolder}/**',
             '!**/node_modules/**',
           },
-          runtimeExecutable = '${workspaceFolder}/node_modules/.bin/ts-node',
         },
         {
           name = 'Node Attach',
@@ -244,20 +244,36 @@ return {
           },
         },
         {
-          name = 'Jest Launch',
           type = 'pwa-node',
           request = 'launch',
-          -- trace = true, -- include debugger info
+          name = 'Launch Test Current File (pwa-node with jest)',
+          cwd = vim.fn.getcwd(),
+          runtimeArgs = { '${workspaceFolder}/node_modules/.bin/jest' },
           runtimeExecutable = 'node',
-          runtimeArgs = {
-            './node_modules/jest/bin/jest.js',
-            '--runInBand',
-          },
+          args = { '${file}', '--coverage', 'false'},
           rootPath = '${workspaceFolder}',
-          cwd = '${workspaceFolder}',
+          sourceMaps = true,
           console = 'integratedTerminal',
           internalConsoleOptions = 'neverOpen',
-        },
+          skipFiles = { '<node_internals>/**', 'node_modules/**' },
+        }
+        -- {
+        --   name = 'Jest Launch',
+        --   type = 'pwa-node',
+        --   request = 'launch',
+        --   -- program = '../../node_modules/jest/bin/jest.js',
+        --   args = {
+        --     -- '${fileBasenameNoExtension}',
+        --     '.node_modules/jest/.bin/jest.js',
+        --     '--runInBand'
+        --     -- '--config',
+        --     -- '../../jest.config.ts',
+        --   },
+        --   rootPath = '${workspaceFolder}',
+        --   cwd = vim.fn.getcwd(),
+        --   console = 'integratedTerminal',
+        --   internalConsoleOptions = 'neverOpen',
+        -- },
       }
     end
 
