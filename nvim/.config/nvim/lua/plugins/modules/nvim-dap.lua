@@ -247,33 +247,21 @@ return {
           type = 'pwa-node',
           request = 'launch',
           name = 'Launch Test Current File (pwa-node with jest)',
-          cwd = vim.fn.getcwd(),
+          cwd = '${workspaceFolder}',
           runtimeArgs = { '${workspaceFolder}/node_modules/.bin/jest' },
           runtimeExecutable = 'node',
-          args = { '${file}', '--coverage', 'false'},
+          args = {
+            '${file}',
+            '--runInBand',
+            '--coverage',
+            'false'
+          },
           rootPath = '${workspaceFolder}',
           sourceMaps = true,
           console = 'integratedTerminal',
           internalConsoleOptions = 'neverOpen',
           skipFiles = { '<node_internals>/**', 'node_modules/**' },
         }
-        -- {
-        --   name = 'Jest Launch',
-        --   type = 'pwa-node',
-        --   request = 'launch',
-        --   -- program = '../../node_modules/jest/bin/jest.js',
-        --   args = {
-        --     -- '${fileBasenameNoExtension}',
-        --     '.node_modules/jest/.bin/jest.js',
-        --     '--runInBand'
-        --     -- '--config',
-        --     -- '../../jest.config.ts',
-        --   },
-        --   rootPath = '${workspaceFolder}',
-        --   cwd = vim.fn.getcwd(),
-        --   console = 'integratedTerminal',
-        --   internalConsoleOptions = 'neverOpen',
-        -- },
       }
     end
 

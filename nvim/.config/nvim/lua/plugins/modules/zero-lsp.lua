@@ -8,9 +8,7 @@ return {
       {
         -- Optional
         'williamboman/mason.nvim',
-        build = function()
-          pcall(vim.cmd, 'MasonUpdate')
-        end,
+        build = ':MasonUpdate'
       },
       { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
@@ -23,10 +21,21 @@ return {
     },
     config = function()
       local lsp = require('lsp-zero').preset('recommended')
+      local lspconfig = require('lspconfig')
+
+      lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
+      lspconfig.eslint.setup({
+        filestypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'json'},
+        settings = {
+          format = { enable = true },
+          lint = { enable = true },
+        },
+      })
 
       lsp.ensure_installed({
         'tsserver',
         'eslint',
+        'rust_analyzer'
       })
 
       local cmp = require('cmp')

@@ -1,3 +1,5 @@
+local Util = require('./util')
+
 return {
   {
     'nvim-telescope/telescope.nvim',
@@ -165,6 +167,21 @@ return {
       telescope.load_extension('ui-select')
       telescope.load_extension('dap')
       telescope.load_extension("zoxide")
-    end
+    end,
+    keys = {
+      {'<leader>/', '<cmd>Telescope current_buffer_fuzzy_find<cr>', desc = 'Search Current Buffer'},
+      {'<leader>gf', '<cmd>Telescope git_files<cr>', desc = 'Search [G]it [F]iles'},
+      {'<leader>sF', Util.telescope('files'), desc = '[S]earch [F]iles (root dir)'},
+      {'<leader>sf', Util.telescope('files', { cwd = false }), desc = '[S]earch [F]iles (cwd)'},
+      {'<leader>sh', '<cmd>Telescope help_tags<cr>', desc = '[S]earch [H]elp'},
+      {'<leader>sW', Util.telescope('grep_string'), desc = '[S]earch current [W]ord (root dir)'},
+      {'<leader>sw', Util.telescope('grep_string', { cwd = false }), desc = '[S]earch current [W]ord (cwd)'},
+      {'<leader>sG', Util.telescope('live_grep'), desc = '[S]earch by [G]rep (root dir)'},
+      {'<leader>sg', Util.telescope('live_grep', { cwd = false }), desc = '[S]earch by [G]rep (cwd)'},
+      {'<leader>sd', '<cmd>Telescope diagnostics bufnr=0<cr>', desc = '[S]earch [D]iagnostics (document)'},
+      {'<leader>sD', '<cmd>Telescope diagnostics<cr>', desc = '[S]earch [D]iagnostics (workspace)'},
+      {'<leader>?', '<cmd>Telescope oldfiles<cr>',  desc = '[?] Find recently opened files' },
+      {'<leader><space>', '<cmd>Telescope buffers<cr>',  desc = '[ ] Find existing buffers' },
+    }
   },
 }

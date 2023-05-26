@@ -24,7 +24,6 @@ return {
         auto_install = true,
         ensure_installed = {
           "bash",
-          "c",
           "html",
           "javascript",
           "json",
@@ -42,7 +41,6 @@ return {
           "vimdoc",
           "yaml",
           "rust",
-          "go"
         },
         incremental_selection = {
           enable = true,
