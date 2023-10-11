@@ -10,6 +10,7 @@ return {
 			"nvim-lua/plenary.nvim",
 			"jvgrootveld/telescope-zoxide",
 			"nvim-tree/nvim-web-devicons",
+			"ThePrimeagen/harpoon",
 			{
 				"nvim-telescope/telescope-fzf-native.nvim",
 				build = "make",
