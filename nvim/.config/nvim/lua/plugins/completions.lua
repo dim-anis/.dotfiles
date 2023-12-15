@@ -1,13 +1,20 @@
 return {
 	"hrsh7th/nvim-cmp",
+	version = false,
+	event = "InsertEnter",
 	dependencies = {
-		"L3MON4D3/LuaSnip",
+		{
+			"L3MON4D3/LuaSnip",
+			version = "v2.*",
+			build = "make install_jsregexp",
+		},
 		"saadparwaiz1/cmp_luasnip",
 		"hrsh7th/cmp-nvim-lsp",
 		"rafamadriz/friendly-snippets",
 		"onsails/lspkind.nvim",
 	},
 	opts = function()
+		vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
 		local lspkind = require("lspkind")

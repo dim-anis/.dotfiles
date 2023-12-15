@@ -1,3 +1,7 @@
+-- set leader key
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 vim.opt.relativenumber = true
 vim.opt.nu = true
 
@@ -40,3 +44,6 @@ vim.opt.timeoutlen = 300
 
 -- Set completeopt to have a better completion experience
 vim.opt.completeopt = "menuone,noselect"
+
+-- disable swap files
+vim.opt.swapfile = false
