@@ -5,7 +5,7 @@ return {
 		dependencies = {
 			"mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
-			{ "j-hui/fidget.nvim", tag = "legacy", opts = {} },
+			"j-hui/fidget.nvim",
 			"folke/neodev.nvim",
 		},
 		opts = {
@@ -40,17 +40,30 @@ return {
 			},
 			servers = {
 				tsserver = {
-					filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte" },
+					filetypes = {
+						"javascript",
+						"javascriptreact",
+						"typescript",
+						"typescriptreact",
+						"vue",
+						"svelte",
+					},
 				},
 				tailwindcss = {
 					filetypes = { "javascriptreact", "typescriptreact" },
 				},
-				eslint = {
-					filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte" },
+				lua_ls = {
 					settings = {
-						workingDirectory = { mode = "auto" },
-						format = { enable = true },
-						lint = { enable = true },
+						Lua = {
+							workspace = {
+								checkThirdParty = false,
+							},
+							telemetry = { enable = false },
+							completion = {
+								callSnippet = "Replace",
+							},
+							diagnostics = { disable = { "missing-fields" } },
+						},
 					},
 				},
 				jsonls = {
@@ -66,25 +79,11 @@ return {
 						},
 					},
 				},
-				lua_ls = {
-					settings = {
-						Lua = {
-							workspace = {
-								checkThirdParty = false,
-							},
-							completion = {
-								callSnippet = "Replace",
-							},
-						},
-					},
-				},
 			},
 			setup = {},
 		},
 		config = function(_, opts)
-			require("mason").setup()
-			require("mason-lspconfig").setup()
-			require("neodev").setup()
+			require("neodev").setup({})
 
 			local on_attach = function(_, bufnr)
 				local nmap = function(keys, func, desc)
@@ -95,19 +94,27 @@ return {
 					vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
 				end
 
+				local imap = function(keys, func, desc)
+					if desc then
+						desc = "LSP: " .. desc
+					end
+
+					vim.keymap.set("i", keys, func, { buffer = bufnr, desc = desc })
+				end
+
 				nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
 				nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
-				nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
+				nmap("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
 				nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-				nmap("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
-				nmap("<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
+				nmap("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
+				nmap("<leader>gt", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
 				nmap("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
 				nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 				nmap("K", vim.lsp.buf.hover, "Hover Documentation")
 
 				-- set normal & insert mode signature help
-				nmap("gK", vim.lsp.buf.signature_help, "Signature Documentation")
 				nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
+				imap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation (Insert Mode)")
 
 				-- Lesser used LSP functionality
 				nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
@@ -123,6 +130,7 @@ return {
 				end, { desc = "Format current buffer with LSP" })
 			end
 
+			-- Diagnostics Signs
 			local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
 			for type, icon in pairs(signs) do
 				local hl = "DiagnosticSign" .. type

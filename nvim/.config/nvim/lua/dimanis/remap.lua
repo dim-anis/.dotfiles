@@ -12,7 +12,7 @@ map("n", "<C-k>", "<C-w>k", opts)
 map("n", "<C-l>", "<C-w>l", opts)
 
 -- show diagnostic message
-map("n", "<leader>e", '<cmd>lua vim.diagnostic.open_float(0, {scope="line"})<CR>')
+map("n", "<leader>e", vim.diagnostic.open_float)
 
 -- initialize new tmux session with tmux-sessionizer
 map("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")

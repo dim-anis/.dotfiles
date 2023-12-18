@@ -8,7 +8,7 @@ return {
 			{
 				"<leader>f",
 				function()
-					require("conform").format({ async = true, lsp_fallback = true })
+					require("conform").format({ async = false, timeout_ms = 500, lsp_fallback = true })
 				end,
 				mode = "",
 				desc = "Format buffer",
@@ -24,13 +24,21 @@ return {
 		},
 		opts = {
 			formatters_by_ft = {
+				javascript = { { "prettier_d", "prettier" } },
+				typescript = { { "prettier_d", "prettier" } },
+				javascriptreact = { { "prettier_d", "prettier" } },
+				typescriptreact = { { "prettier_d", "prettier" } },
+				json = { { "prettier_d", "prettier" } },
+				css = { { "prettier_d", "prettier" } },
+				html = { { "prettier_d", "prettier" } },
+				markdown = { { "prettier_d", "prettier" } },
 				lua = { "stylua" },
-				javascript = { { "prettierd", "prettier" } },
 			},
 			formatters = {},
 			format_on_save = {
-				timeout_ms = 500,
 				lsp_fallback = true,
+				async = false,
+				timeout_ms = 500,
 			},
 		},
 		config = function(_, opts)
