@@ -47,3 +47,8 @@ vim.opt.completeopt = "menuone,noselect"
 
 -- disable swap files
 vim.opt.swapfile = false
+
+-- add borders to diagnostics window
+vim.diagnostic.config({
+	float = { border = "rounded" },
+})
