@@ -66,6 +66,12 @@ return {
 						},
 					},
 				},
+				eslint = {
+					settings = {
+						-- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
+						workingDirectory = { mode = "auto" },
+					},
+				},
 				jsonls = {
 					-- lazy-load schemastore when needed
 					on_new_config = function(new_config)
@@ -104,12 +110,14 @@ return {
 
 				nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
 				nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+
 				nmap("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
 				nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
 				nmap("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
-				nmap("<leader>gt", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
+				nmap("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
 				nmap("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
 				nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+
 				nmap("K", vim.lsp.buf.hover, "Hover Documentation")
 
 				-- set normal & insert mode signature help
@@ -140,6 +148,7 @@ return {
 			local servers = opts.servers
 
 			local mason_lspconfig = require("mason-lspconfig")
+
 			mason_lspconfig.setup({
 				ensure_installed = vim.tbl_keys(servers),
 			})
@@ -163,24 +172,6 @@ return {
 			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 			vim.lsp.handlers["textDocument/signatureHelp"] =
 				vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
-
-			-- local function setup(server)
-			--   local server_opts = vim.tbl_deep_extend("force", {
-			--     capabilities = capabilities,
-			--     on_attach = on_attach
-			--   }, servers[server] or {})
-			--
-			--   if opts.setup[server] then
-			--     if opts.setup[server](server, server_opts) then
-			--       return
-			--     end
-			--   elseif opts.setup["*"] then
-			--     if opts.setup["*"](server, server_opts) then
-			--       return
-			--     end
-			--   end
-			--   require("lspconfig")[server].setup(server_opts)
-			-- end
 		end,
 	},
 

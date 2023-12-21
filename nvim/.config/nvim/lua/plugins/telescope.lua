@@ -4,7 +4,7 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
-		version = "*",
+		tag = "0.1.5",
 		lazy = true,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
@@ -184,45 +184,72 @@ return {
 			telescope.load_extension("ui-select")
 			telescope.load_extension("dap")
 			telescope.load_extension("zoxide")
-		end,
-		keys = {
-			{ "<leader>/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Search Current Buffer" },
-			{ "<leader>gf", "<cmd>Telescope git_files<cr>", desc = "Search [G]it [F]iles" },
-			{ "<leader>sF", Util.telescope("files"), desc = "[S]earch [F]iles (root dir)" },
-			{ "<leader>sf", Util.telescope("files", { cwd = false }), desc = "[S]earch [F]iles (cwd)" },
-			{ "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "[S]earch [H]elp" },
-			{
+
+			vim.keymap.set(
+				"n",
+				"<leader><space>",
+				require("telescope.builtin").buffers,
+				{ desc = "[ ] Find existing buffers" }
+			)
+			vim.keymap.set(
+				"n",
+				"<leader>ss",
+				require("telescope.builtin").builtin,
+				{ desc = "[S]earch [S]elect Telescope" }
+			)
+			vim.keymap.set("n", "<leader>/", function()
+				require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+					winblend = 10,
+					previewer = false,
+				}))
+			end, { desc = "[/] Fuzzily earch in current buffer" })
+			vim.keymap.set("n", "<leader>gf", require("telescope.builtin").git_files, { desc = "Search [G]it [F]iles" })
+			vim.keymap.set("n", "<leader>sF", Util.telescope("files"), { desc = "[S]earch [F]iles (root dir)" })
+			vim.keymap.set(
+				"n",
+				"<leader>sf",
+				Util.telescope("files", { cwd = false }),
+				{ desc = "[S]earch [F]iles (cwd)" }
+			)
+			vim.keymap.set("n", "<leader>sh", "<cmd>Telescope help_tags<cr>", { desc = "[S]earch [H]elp" })
+			vim.keymap.set(
+				"n",
 				"<leader>sW",
 				Util.telescope("grep_string"),
-				desc = "[S]earch current [W]ord (root dir)",
-			},
-			{
+				{ desc = "[S]earch current [W]ord (root dir)" }
+			)
+			vim.keymap.set(
+				"n",
 				"<leader>sw",
 				Util.telescope("grep_string", { cwd = false }),
-				desc = "[S]earch current [W]ord (cwd)",
-			},
-			{
-				"<leader>sG",
-				Util.telescope("live_grep"),
-				desc = "[S]earch by [G]rep (root dir)",
-			},
-			{ "<leader>sg", Util.telescope("live_grep", { cwd = false }), desc = "[S]earch by [G]rep (cwd)" },
-			{
+				{ desc = "[S]earch current [W]ord (cwd)" }
+			)
+			vim.keymap.set("n", "<leader>sh", require("telescope.builtin").help_tags, { desc = "[S]earch [H]elp" })
+			vim.keymap.set(
+				"n",
+				"<leader>sw",
+				require("telescope.builtin").grep_string,
+				{ desc = "[S]earch current [W]ord" }
+			)
+			vim.keymap.set("n", "<leader>sG", Util.telescope("live_grep"), { desc = "[S]earch by [G]rep (root dir)" })
+			vim.keymap.set(
+				"n",
+				"<leader>sg",
+				Util.telescope("live_grep", { cwd = false }),
+				{ desc = "[S]earch by [G]rep (cwd)" }
+			)
+			vim.keymap.set(
+				"n",
 				"<leader>sd",
-				"<cmd>Telescope diagnostics bufnr=0<cr>",
-				desc = "[S]earch [D]iagnostics (document)",
-			},
-			{
-				"<leader>sD",
-				"<cmd>Telescope diagnostics<cr>",
-				desc = "[S]earch [D]iagnostics (workspace)",
-			},
-			{
+				require("telescope.builtin").diagnostics,
+				{ desc = "[S]earch [D]iagnostics" }
+			)
+			vim.keymap.set(
+				"n",
 				"<leader>?",
-				"<cmd>Telescope oldfiles<cr>",
-				desc = "[?] Find recently opened files",
-			},
-			{ "<leader><space>", "<cmd>Telescope buffers<cr>", desc = "[ ] Find existing buffers" },
-		},
+				require("telescope.builtin").oldfiles,
+				{ desc = "[?] Find recently opened files" }
+			)
+		end,
 	},
 }

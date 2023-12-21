@@ -21,14 +21,12 @@ return {
 			auto_install = true,
 			ensure_installed = {
 				"bash",
+				"go",
 				"html",
 				"javascript",
 				"json",
 				"lua",
-				"luadoc",
-				"luap",
 				"markdown",
-				"markdown_inline",
 				"python",
 				"query",
 				"regex",
@@ -88,10 +86,26 @@ return {
 						["]c"] = { query = "@class.outer", desc = "Next class" },
 						["]p"] = { query = "@parameter.inner", desc = "Next parameter" },
 					},
+					swap = {
+						enable = true,
+						swap_next = {
+							["<leader>a"] = "@parameter.inner",
+						},
+						swap_previous = {
+							["<leader>A"] = "@parameter.inner",
+						},
+					},
 				},
 			},
 		},
 		config = function(_, opts)
+			vim.filetype.add({
+				extension = {
+					mdx = "mdx",
+				},
+			})
+			vim.treesitter.language.register("markdown", "mdx")
+
 			if type(opts.ensure_installed) == "table" then
 				---@type table<string, boolean>
 				local added = {}
