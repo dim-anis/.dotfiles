@@ -5,12 +5,23 @@ return {
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
 		tag = "0.1.5",
+		event = "VimEnter",
 		lazy = true,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"jvgrootveld/telescope-zoxide",
-			"nvim-tree/nvim-web-devicons",
-			"ThePrimeagen/harpoon",
+			{
+				"nvim-tree/nvim-web-devicons",
+				opts = {
+					override_by_extension = {
+						astro = {
+							icon = "",
+							color = "#EF8547",
+							name = "astro",
+						},
+					},
+				},
+			},
 			{
 				"nvim-telescope/telescope-fzf-native.nvim",
 				build = "make",
@@ -224,7 +235,6 @@ return {
 				Util.telescope("grep_string", { cwd = false }),
 				{ desc = "[S]earch current [W]ord (cwd)" }
 			)
-			vim.keymap.set("n", "<leader>sh", require("telescope.builtin").help_tags, { desc = "[S]earch [H]elp" })
 			vim.keymap.set(
 				"n",
 				"<leader>sw",

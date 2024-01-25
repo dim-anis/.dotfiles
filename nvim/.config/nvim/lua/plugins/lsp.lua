@@ -39,6 +39,7 @@ return {
 				timeout_ms = nil,
 			},
 			servers = {
+				astro = {},
 				tsserver = {
 					filetypes = {
 						"javascript",
