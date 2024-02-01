@@ -1,5 +1,3 @@
-local Util = require("./util")
-
 return {
 	{
 		"nvim-telescope/telescope.nvim",
@@ -202,6 +200,15 @@ return {
 				require("telescope.builtin").buffers,
 				{ desc = "[ ] Find existing buffers" }
 			)
+
+			local function telescope_live_grep_open_files()
+				require("telescope.builtin").live_grep({
+					grep_open_files = true,
+					prompt_title = "Live Grep in Open Files",
+				})
+			end
+
+			vim.keymap.set("n", "<leader>s/", telescope_live_grep_open_files, { desc = "[S]earch [/] in Open Files" })
 			vim.keymap.set(
 				"n",
 				"<leader>ss",
@@ -215,39 +222,20 @@ return {
 				}))
 			end, { desc = "[/] Fuzzily earch in current buffer" })
 			vim.keymap.set("n", "<leader>gf", require("telescope.builtin").git_files, { desc = "Search [G]it [F]iles" })
-			vim.keymap.set("n", "<leader>sF", Util.telescope("files"), { desc = "[S]earch [F]iles (root dir)" })
 			vim.keymap.set(
 				"n",
 				"<leader>sf",
-				Util.telescope("files", { cwd = false }),
-				{ desc = "[S]earch [F]iles (cwd)" }
+				require("telescope.builtin").find_files({ desc = "[S]earch [F]iles (cwd)" })
 			)
 			vim.keymap.set("n", "<leader>sh", "<cmd>Telescope help_tags<cr>", { desc = "[S]earch [H]elp" })
 			vim.keymap.set(
 				"n",
-				"<leader>sW",
-				Util.telescope("grep_string"),
-				{ desc = "[S]earch current [W]ord (root dir)" }
-			)
-			vim.keymap.set(
-				"n",
-				"<leader>sw",
-				Util.telescope("grep_string", { cwd = false }),
-				{ desc = "[S]earch current [W]ord (cwd)" }
-			)
-			vim.keymap.set(
-				"n",
 				"<leader>sw",
 				require("telescope.builtin").grep_string,
-				{ desc = "[S]earch current [W]ord" }
+				{ desc = "[S]earch current [W]ord (root dir)" }
 			)
-			vim.keymap.set("n", "<leader>sG", Util.telescope("live_grep"), { desc = "[S]earch by [G]rep (root dir)" })
-			vim.keymap.set(
-				"n",
-				"<leader>sg",
-				Util.telescope("live_grep", { cwd = false }),
-				{ desc = "[S]earch by [G]rep (cwd)" }
-			)
+			vim.keymap.set("n", "<leader>sg", require("telescope.builtin").live_grep({ desc = "[S]earch by [G]rep" }))
+			vim.keymap.set("n", "<leader>sG", ":LiveGrepGitRoot<cr>", { desc = "[S]earch by [G]rep on Git Root" })
 			vim.keymap.set(
 				"n",
 				"<leader>sd",
