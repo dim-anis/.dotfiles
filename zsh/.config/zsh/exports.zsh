@@ -16,4 +16,3 @@ export PATH=$HOME/.local/share/zig:$PATH
 export PATH=$HOME/.local/share/go/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
 export PATH=$HOME/.fnm:$PATH
-eval "$(fnm env)"
