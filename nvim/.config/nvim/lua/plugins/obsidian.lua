@@ -3,32 +3,29 @@ return {
 	version = "*",
 	lazy = true,
 	ft = "markdown",
-	-- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
-	-- event = {
-	--   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-	--   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
-	--   "BufReadPre path/to/my-vault/**.md",
-	--   "BufNewFile path/to/my-vault/**.md",
-	-- },
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 	},
+	init = function()
+		require("which-key").register({ o = { name = "+obsidian" } }, { prefix = "<leader>", mode = { "n", "v" } })
+	end,
+	keys = {
+		{ "<leader>on", "<cmd>ObsidianNew<CR>", desc = "New Note" },
+		{ "<leader>od", "<cmd>ObsidianToday<CR>", desc = "Todays Note" },
+	},
 	opts = {
-		workspaces = {
-			{
-				name = "personal",
-				path = "~/Documents/obsidian",
-			},
-		},
-		completetion = {
+		dir = "~/Documents/obsidian",
+		notes_subdir = "./",
+		ui = { enable = false },
+		completion = {
 			nvim_cpm = true,
 			min_chars = 2,
-			new_notes_location = "current_dir",
-			preferred_link_style = "markdown",
 		},
+		preferred_link_style = "markdown",
+		new_notes_location = "notes_subdir",
 		mappings = {
-			-- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
-			["gf"] = {
+			-- Open obsidian link.
+			["fo"] = {
 				action = function()
 					return require("obsidian").util.gf_passthrough()
 				end,
@@ -41,6 +38,35 @@ return {
 				end,
 				opts = { buffer = true },
 			},
+		},
+		prepend_note_id = true,
+		-- Optional, customize how names/IDs for new notes are created.
+		note_id_func = function(title)
+			-- Create note IDs in a Zettelkasten format with a timestamp and a suffix.
+			-- In this case a note with the title 'My new note' will be given an ID that looks
+			-- like '1657296016-my-new-note', and therefore the file name '1657296016-my-new-note.md'
+			local suffix = ""
+			if title ~= nil then
+				-- If title is given, transform it into valid file name.
+				suffix = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
+			else
+				-- If title is nil, just add 4 random uppercase letters to the suffix.
+				for _ = 1, 4 do
+					suffix = suffix .. string.char(math.random(65, 90))
+				end
+			end
+			-- return tostring(os.date("%Y%m%d%H%M%S")) .. "-" .. suffix
+			return tostring(os.time()) .. "-" .. suffix
+		end,
+		log_level = vim.log.levels.INFO,
+		daily_notes = {
+			folder = "/daily",
+			-- Optional, if you want to change the date format for the ID of daily notes.
+			date_format = "%Y-%m-%d",
+			-- Optional, if you want to change the date format of the default alias of daily notes.
+			alias_format = "%B %-d, %Y",
+			-- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
+			-- template = "templates/daily.md",
 		},
 		templates = {
 			subdir = "templates",
@@ -63,10 +89,7 @@ return {
 		use_advanced_uri = false,
 
 		picker = {
-			-- Set your preferred picker. Can be one of 'telescope.nvim', 'fzf-lua', or 'mini.pick'.
 			name = "telescope.nvim",
-			-- Optional, configure key mappings for the picker. These are the defaults.
-			-- Not all pickers support all mappings.
 			mappings = {
 				-- Create a new note from your query.
 				new = "<C-x>",
