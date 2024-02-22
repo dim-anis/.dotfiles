@@ -17,9 +17,11 @@ map("n", "<C-j>", "<C-w>j", opts)
 map("n", "<C-k>", "<C-w>k", opts)
 map("n", "<C-l>", "<C-w>l", opts)
 
--- show diagnostic message
-vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
+-- diagnostic keymaps
+map("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
+map("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
+map("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
+map("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
 -- initialize new tmux session with tmux-sessionizer
 map("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
