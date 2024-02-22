@@ -11,6 +11,7 @@ HISTFILE=~/.zsh_history
 
 # source ZAP plugin manager
 [ -f "$HOME/.local/share/zap/zap.zsh" ] && source "$HOME/.local/share/zap/zap.zsh"
+
 # source p10k
 [[ ! -f ~/.p10k.zsh ]] || plug "$HOME/.p10k.zsh"
 # source aliases and exports
@@ -31,11 +32,3 @@ plug "romkatv/powerlevel10k"
 # zsh-autosuggestions | accept-suggestion
 bindkey '^ ' autosuggest-accept
 bindkey -s '^f' 'tmux-sessionizer\n'
-
-# pnpm
-export PNPM_HOME="/Users/dimanis/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
