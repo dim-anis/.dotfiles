@@ -5,9 +5,12 @@ return {
 	dependencies = {
 		{
 			"L3MON4D3/LuaSnip",
-			build = (not jit.os:find("Windows"))
-					and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp"
-				or nil,
+			build = (function()
+				if vim.fn.has("win32") == 1 then
+					return
+				end
+				return "make install_jsregexp"
+			end)(),
 			opts = {
 				history = true,
 				delete_check_events = "TextChanged",
@@ -15,6 +18,7 @@ return {
 		},
 		"saadparwaiz1/cmp_luasnip",
 		"hrsh7th/cmp-nvim-lsp",
+		"hrsh7th/cmp-path",
 		"rafamadriz/friendly-snippets",
 		"onsails/lspkind.nvim",
 	},
@@ -46,10 +50,7 @@ return {
 				["<C-d>"] = cmp.mapping.scroll_docs(-4),
 				["<C-f>"] = cmp.mapping.scroll_docs(4),
 				["<C-Space>"] = cmp.mapping.complete({}),
-				["<CR>"] = cmp.mapping.confirm({
-					behavior = cmp.ConfirmBehavior.Replace,
-					select = true,
-				}),
+				["<C-y>"] = cmp.mapping.confirm({ select = true }),
 				["<Tab>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
 						cmp.select_next_item()
@@ -72,6 +73,7 @@ return {
 			sources = {
 				{ name = "nvim_lsp" },
 				{ name = "luasnip" },
+				{ name = "path" },
 			},
 			formatting = {
 				format = lspkind.cmp_format({
