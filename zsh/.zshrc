@@ -29,6 +29,6 @@ plug "zap-zsh/fnm"
 plug "zap-zsh/vim"
 plug "romkatv/powerlevel10k"
 
-# zsh-autosuggestions | accept-suggestion
+# bindings
 bindkey '^ ' autosuggest-accept
 bindkey -s '^f' 'tmux-sessionizer\n'
