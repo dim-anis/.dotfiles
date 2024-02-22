@@ -14,13 +14,13 @@ HISTFILE=~/.zsh_history
 
 # source p10k
 [[ ! -f ~/.p10k.zsh ]] || plug "$HOME/.p10k.zsh"
+
 # source aliases and exports
 plug "$HOME/.config/zsh/aliases.zsh"
 plug "$HOME/.config/zsh/exports.zsh"
 
 # install plugins
 plug "zap-zsh/supercharge"
-plug "zap-zsh/exa"
 plug "zsh-users/zsh-autosuggestions"
 plug "hlissner/zsh-autopair"
 plug "zsh-users/zsh-syntax-highlighting"
