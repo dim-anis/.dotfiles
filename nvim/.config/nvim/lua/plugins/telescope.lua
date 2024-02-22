@@ -2,7 +2,7 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
-		tag = "0.1.x",
+		branch = "0.1.x",
 		event = "VimEnter",
 		lazy = true,
 		dependencies = {
