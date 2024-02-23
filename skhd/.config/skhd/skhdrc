@@ -1,6 +1,6 @@
 # open terminal
-cmd - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~
-
+# cmd - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~
+cmd - return : (LABEL=$(uuidgen) && yabai -m signal --add event="window_created" label="$LABEL" app="^WezTerm$" action="yabai -m window \$YABAI_WINDOW_ID --focus && yabai -m signal --remove $LABEL") && (/Applications/WezTerm.app/Contents/MacOS/wezterm msg create-window || open -na /Applications/WezTerm.app)
 # focus window
 alt - h : yabai -m window --focus west
 alt - j : yabai -m window --focus south
