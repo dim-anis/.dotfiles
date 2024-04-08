@@ -1,6 +1,3 @@
-# automatically switch to the node version used by the current project
-eval "$(fnm env --use-on-cd)"
-
 # enable p10k prompt
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
@@ -29,9 +26,12 @@ plug "zap-zsh/fnm"
 plug "zap-zsh/vim"
 plug "romkatv/powerlevel10k"
 
+export PATH="$HOME/.local/bin":$PATH
+
 # bindings
 bindkey '^ ' autosuggest-accept
 bindkey -s '^f' 'tmux-sessionizer\n'
+
 # pnpm
 export PNPM_HOME="/Users/dimanis/Library/pnpm"
 case ":$PATH:" in

@@ -3,7 +3,7 @@ if [[ $TERM == "xterm-kitty" ]]; then
 fi
 
 # brew
-alias bup='brew upgrade --cask --greedy && brew upgrade'
+alias bup='brew upgrade --cask --greedy && brew upgrade && brew cleanup'
 
 alias nvimrc='nvim ~/.config/nvim/'
 
