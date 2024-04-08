@@ -32,3 +32,10 @@ plug "romkatv/powerlevel10k"
 # bindings
 bindkey '^ ' autosuggest-accept
 bindkey -s '^f' 'tmux-sessionizer\n'
+# pnpm
+export PNPM_HOME="/Users/dimanis/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
