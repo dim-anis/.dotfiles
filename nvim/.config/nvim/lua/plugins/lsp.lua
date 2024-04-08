@@ -50,6 +50,12 @@ return {
 						"svelte",
 					},
 				},
+				cssls = {
+					settings = {
+						css = { lint = { unknownAtRules = "ignore" } },
+						scss = { lint = { unknownAtRules = "ignore" } },
+					},
+				},
 				tailwindcss = {
 					filetypes = { "javascriptreact", "typescriptreact" },
 				},
