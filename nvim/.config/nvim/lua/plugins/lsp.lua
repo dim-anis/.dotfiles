@@ -137,10 +137,6 @@ return {
 
 				nmap("K", vim.lsp.buf.hover, "Hover Documentation")
 
-				-- set normal & insert mode signature help
-				nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
-				imap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation (Insert Mode)")
-
 				-- Lesser used LSP functionality
 				nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 				nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
