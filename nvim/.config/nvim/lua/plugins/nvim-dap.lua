@@ -70,6 +70,7 @@ return {
       config = function(_, opts)
         local dap = require("dap")
         local dapui = require("dapui")
+		"nvim-neotest/nvim-nio",
 
         dap.listeners.after.event_initialized["dapui_config"] = function()
           dapui.open()
