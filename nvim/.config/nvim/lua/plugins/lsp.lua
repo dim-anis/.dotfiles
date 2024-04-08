@@ -41,6 +41,11 @@ return {
 			servers = {
 				astro = {},
 				tsserver = {
+					settings = {
+						format = { enable = false },
+						-- disable unused vars hint
+						diagnostics = { ignoredCodes = { 6133 } },
+					},
 					filetypes = {
 						"javascript",
 						"javascriptreact",
