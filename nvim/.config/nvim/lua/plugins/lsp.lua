@@ -57,7 +57,7 @@ return {
 					},
 				},
 				tailwindcss = {
-					filetypes = { "javascriptreact", "typescriptreact" },
+					filetypes = { "javascriptreact", "typescriptreact", "astro" },
 				},
 				lua_ls = {
 					settings = {
