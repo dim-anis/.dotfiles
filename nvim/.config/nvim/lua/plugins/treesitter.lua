@@ -19,6 +19,7 @@ return {
 					"python",
 					"rust",
 					"tsx",
+					"astro",
 					"markdown",
 					"markdown_inline",
 					"javascript",
