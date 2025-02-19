@@ -29,7 +29,7 @@ plug "romkatv/powerlevel10k"
 export PATH="$HOME/.local/bin":$PATH
 
 # bindings
-bindkey '^ ' autosuggest-accept
+bindkey '^y' autosuggest-accept
 bindkey -s '^f' 'tmux-sessionizer\n'
 
 # pnpm
