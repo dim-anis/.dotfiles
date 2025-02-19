@@ -6,18 +6,23 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LC_TYPE=en_US.UTF-8
 
+# Environment Variables
 export EDITOR="nvim"
 export TERMINAL="wezterm"
 export BROWSER="firefox"
 
-export PATH=$HOME/.local/scripts:$PATH
-export GOPATH=$HOME/.local/share/go
-export PATH=$HOME/.local/share/go/bin:$PATH
-export PATH=$HOME/.local/share/zig:$PATH
-export PATH=$HOME/.cargo/bin:$PATH
-export PATH=$HOME/.fnm:$PATH
+# PATH Configuration
+export GOPATH="$HOME/.local/share/go"
 
+export PATH="$HOME/.local/bin:$HOME/.local/scripts:$GOPATH/bin:$HOME/.local/share/zig"
+export PATH="$HOME/.cargo/bin:$HOME/.fnm:$HOME/.pyenv/bin:/opt/homebrew/opt/postgresql@16/bin:/opt/homebrew/opt/libpq/bin:$PATH"
+
+# Homebrew Optimizations
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_ENV_HINTS=1
 
+# Initialize Environment Managers
 eval "$(fnm env)"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"

@@ -26,8 +26,6 @@ plug "zap-zsh/fnm"
 plug "zap-zsh/vim"
 plug "romkatv/powerlevel10k"
 
-export PATH="$HOME/.local/bin":$PATH
-
 # bindings
 bindkey '^y' autosuggest-accept
 bindkey -s '^f' 'tmux-sessionizer\n'
