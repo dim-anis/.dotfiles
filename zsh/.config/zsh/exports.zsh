@@ -8,7 +8,7 @@ export LC_TYPE=en_US.UTF-8
 
 export EDITOR="nvim"
 export TERMINAL="wezterm"
-export BROWSER="chrome"
+export BROWSER="firefox"
 
 export PATH=$HOME/.local/scripts:$PATH
 export GOPATH=$HOME/.local/share/go
