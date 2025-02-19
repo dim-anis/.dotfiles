@@ -14,7 +14,7 @@ export BROWSER="firefox"
 # PATH Configuration
 export GOPATH="$HOME/.local/share/go"
 
-export PATH="$HOME/.local/bin:$HOME/.local/scripts:$GOPATH/bin:$HOME/.local/share/zig"
+export PATH="$HOME/.local/bin:$HOME/.local/scripts:$GOPATH/bin:$HOME/.local/share/zig:$PATH"
 export PATH="$HOME/.cargo/bin:$HOME/.fnm:$HOME/.pyenv/bin:/opt/homebrew/opt/postgresql@16/bin:/opt/homebrew/opt/libpq/bin:$PATH"
 
 # Homebrew Optimizations
