@@ -5,4 +5,6 @@ return {
   { "folke/persistence.nvim", enabled = false },
   { "ggandor/leap.nvim", enabled = false },
   { "ibhagwan/fzf-lua", enabled = false },
+  { "MagicDuck/grug-far.nvim", enabled = false },
+  { "folke/flash.nvim", enabled = false },
 }
