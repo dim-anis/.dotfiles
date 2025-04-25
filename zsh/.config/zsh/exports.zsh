@@ -15,7 +15,7 @@ export BROWSER="firefox"
 export GOPATH="$HOME/.local/share/go"
 
 export PATH="$HOME/.local/bin:$HOME/.local/scripts:$GOPATH/bin:$HOME/.local/share/zig:$PATH"
-export PATH="$HOME/.cargo/bin:$HOME/.fnm:$HOME/.pyenv/bin:/opt/homebrew/opt/postgresql@16/bin:/opt/homebrew/opt/libpq/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$HOME/.fnm:/opt/homebrew/opt/postgresql@16/bin:/opt/homebrew/opt/libpq/bin:$PATH"
 
 # Homebrew Optimizations
 export HOMEBREW_NO_ANALYTICS=1
@@ -23,6 +23,4 @@ export HOMEBREW_NO_ENV_HINTS=1
 
 # Initialize Environment Managers
 eval "$(fnm env)"
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+eval "$(~/.local/bin/mise activate)"
