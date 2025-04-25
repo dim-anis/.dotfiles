@@ -29,6 +29,17 @@ return {
             return require("lspconfig.util").root_pattern(".git")(...)
           end,
         },
+        denols = {
+          filetypes = { "typescript", "typescriptreact" },
+          root_dir = function(...)
+            return require("lspconfig.util").root_pattern("deno.jsonc", "deno.json")(...)
+          end,
+        },
+        vtsls = {
+          root_dir = function(...)
+            return require("lspconfig.util").root_pattern("package.json")(...)
+          end,
+        },
         ts_ls = {
           root_dir = function(...)
             return require("lspconfig.util").root_pattern(".git")(...)
